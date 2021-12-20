@@ -15,13 +15,16 @@ const url = process.env.MONGO_URI;
 
 require('./models/user')
 
-app.use(cors({
-    origin: "*"
-}))
+const corsOptions ={
+    origin:'*', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 
 const razorpay = new Razorpay({
-    key_id: 'rzp_test_Pa1nNOyziSCFKL',
-    key_secret: 'G9ipcVv3SIg6lRDWU7JefikP',
+    key_id: process.env.RAZOR_PAY_KEY_ID,
+    key_secret: process.env.RAZOR_PAY_KEY_SECRET,
   });
 
 app.use(express.json());
@@ -34,7 +37,7 @@ app.use('/uploads',express.static(path.join(__dirname,'uploads')));
 
 app.post('/verification',(req,res) => {
     //Validation
-const secret = 'JayanthRazorLm10'
+const secret = process.env.RAZOR_PAY_VERIFICATION_SECRET
 console.log(req.body)
 const crypto = require('crypto')
 

@@ -9,3 +9,4 @@ userRouter.post('/login',loginUser)
 userRouter.get('/address/:user',getUserAdrs)
 
 module.exports = userRouter
+ 
