@@ -222,7 +222,7 @@ const loginUser = async (req,res) => {
           res.json({
               message:true,
               token,
-              user:user._id
+              userRole:user.role
           });
           } else {
               res.status(500).json({
